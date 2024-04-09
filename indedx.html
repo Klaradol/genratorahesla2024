@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>generátor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    
+<h2> Generátor a správa hesel</h2>
+
+<form>
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname"><br>
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email"><br>
+    <label for="pasword">Password:</label><br>
+    <input type="text" id="pasword" name="pasword"><br>
+    <input type="submit" value="Submit">
+    <button type="register" value="register">register</button>
+  </form>
+</head>
+<body>
+ 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            background-color:#ef9db9 ;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #ff4785;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #f4417d;
+        }
+        #password {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+    </style>
+    </head>
+    <body>
+     
+    <form id="passwordForm">
+        <label for="length">Délka hesla:</label>
+        <input type="number" id="length" name="length" min="6" max="20" value="12">
+        <br>
+        <input type="checkbox" id="includeNumbers" name="includeNumbers" checked>
+        <label for="includeNumbers">Zahrnout čísla (0-9)</label>
+        <br>
+        <input type="checkbox" id="includeSymbols" name="includeSymbols">
+        <label for="includeSymbols">Zahrnout speciální znaky (@, $, *, atd.)</label>
+        <br>
+        <input type="checkbox" id="includeUppercase" name="includeUppercase" checked>
+        <label for="includeUppercase">Zahrnout velká písmena (A-Z)</label>
+        <br>
+        <button type="button" onclick="generatePassword()">Generovat heslo</button>
+    </form>
+     
+    <div id="password"></div>
+     
+    <script>
+        function generatePassword() {
+            var length = document.getElementById("length").value;
+            var includeNumbers = document.getElementById("includeNumbers").checked;
+            var includeSymbols = document.getElementById("includeSymbols").checked;
+            var includeUppercase = document.getElementById("includeUppercase").checked;
+     
+            var charset = "abcdefghijklmnopqrstuvwxyz";
+            var password = "";
+           
+            if (includeNumbers) charset += "0123456789";
+            if (includeSymbols) charset += "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+            if (includeUppercase) charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+     
+            for (var i = 0; i < length; i++) {
+                password += charset.charAt(Math.floor(Math.random() * charset.length));
+            }
+     
+            document.getElementById("password").textContent = password;
+        }
+    </script>
+ 
+</body>
+</html>
